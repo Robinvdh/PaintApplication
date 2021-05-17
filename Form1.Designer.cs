@@ -284,6 +284,7 @@ namespace PaintApplication
             this.eraseButton.TabIndex = 10;
             this.eraseButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.eraseButton.UseVisualStyleBackColor = false;
+            this.eraseButton.Click += new System.EventHandler(this.eraseButton_Click);
             // 
             // pencilButton
             // 

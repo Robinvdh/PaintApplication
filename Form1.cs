@@ -28,7 +28,8 @@ namespace PaintApplication
         Graphics g;
         bool paint = false;
         Point px, py;
-        Pen p = new Pen(Color.Black,1);
+        Pen p = new Pen(Color.Black, 1);
+        Pen erase = new Pen(Color.White, 25);
         int index;
 
         private void pic_MouseDown(object sender, MouseEventArgs e)
@@ -47,6 +48,13 @@ namespace PaintApplication
                     g.DrawLine(p, px, py);
                     py = px;
                 }
+
+                if(index == 2)
+                {
+                    px = e.Location;
+                    g.DrawLine(erase, px, py);
+                    py = px;
+                }
             }
 
             pic.Refresh();
@@ -60,6 +68,11 @@ namespace PaintApplication
         private void pencilButton_click(object send, EventArgs e)
         {
             index = 1;
+        }
+
+        private void eraseButton_Click(object sender, EventArgs e)
+        {
+            index = 2;
         }
 
         private void exitProgramTopMenuItem_Click(object sender, EventArgs e)
