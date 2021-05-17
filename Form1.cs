@@ -35,11 +35,15 @@ namespace PaintApplication
         Pen p = new Pen(Color.Black, 1);
         Pen erase = new Pen(Color.White, 25);
         int index;
+        int x, y, sX, sY, cX, cY;
 
         private void pic_MouseDown(object sender, MouseEventArgs e)
         {
             paint = true;
             py = e.Location;
+
+            cX = e.X;
+            cY = e.Y;
         }
 
         private void pic_MouseMove(object sender, MouseEventArgs e)
@@ -53,7 +57,7 @@ namespace PaintApplication
                     py = px;
                 }
 
-                if(index == 2)
+                if (index == 2)
                 {
                     px = e.Location;
                     g.DrawLine(erase, px, py);
@@ -62,11 +66,43 @@ namespace PaintApplication
             }
 
             canvas.Refresh();
+
+            x = e.X;
+            y = e.Y;
+            sX = e.X - cX;
+            sY = e.Y - cY;
         }
 
         private void pic_MouseUp(object sender, MouseEventArgs e)
         {
             paint = false;
+
+            sX = x - cX;
+            sY = y - cY;
+
+            if (index == 3)
+            {
+                g.DrawEllipse(p, cX, cY, sX, sY);
+            }
+
+            if (index == 4)
+            {
+                g.DrawLine(p, cX, cY, x, y);
+            }
+
+            if (index == 5)
+            {
+                List<Point> points = new List<Point>();
+
+                points.Add(new Point(x, y));
+
+                g.DrawPolygon(p, points.ToArray());
+            }
+
+            if (index == 6)
+            {
+                g.DrawRectangle(p, cX, cY, sX, sY);
+            }
         }
 
         private void pencilButton_click(object send, EventArgs e)
@@ -79,12 +115,67 @@ namespace PaintApplication
             index = 2;
         }
 
+        private void elipseButton_Click(object sender, EventArgs e)
+        {
+            index = 3;
+        }
+
+        private void lineButton_Click(object sender, EventArgs e)
+        {
+            index = 4;
+        }
+
+        private void triangleButton_Click(object sender, EventArgs e)
+        {
+            index = 5;
+        }
+
+        private void squareButton_Click(object sender, EventArgs e)
+        {
+            index = 6;
+        }
+
         private void exitProgramTopMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Wilt u het programma afsluiten?", "Afsluiten", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
                 Application.Exit();
             }
+        }
+
+        private void canvas_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+
+            if(paint)
+            {
+                if (index == 3)
+                {
+                    g.DrawEllipse(p, cX, cY, sX, sY);
+                }
+
+                if (index == 4)
+                {
+                    g.DrawLine(p, cX, cY, x, y);
+                }
+
+                if (index == 5)
+                {
+                    Point[] pointArray =
+                    {
+                        new Point(0, 0),
+                        new Point(50, 30),
+                        new Point(30, 60)
+                    };
+                    
+                    g.DrawPolygon(p, pointArray);
+                }
+
+                if (index == 6)
+                {
+                    g.DrawRectangle(p, cX, cY, sX, sY);
+                }
+            }    
         }
 
         private void loadFileTopMenuItem_Click(object sender, EventArgs e)
