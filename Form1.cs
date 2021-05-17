@@ -12,6 +12,10 @@ namespace PaintApplication
 {
     public partial class PaintApplication : Form
     {
+
+        /// <summary>
+        /// If you need comments, the function names are not good enough.
+        /// </summary>
         public PaintApplication()
         {
             InitializeComponent();
