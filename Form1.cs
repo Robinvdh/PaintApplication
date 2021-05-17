@@ -22,10 +22,10 @@ namespace PaintApplication
 
             this.Width = 900;
             this.Height = 700;
-            bm = new Bitmap(pic.Width, pic.Height);
+            bm = new Bitmap(canvas.Width, canvas.Height);
             g = Graphics.FromImage(bm);
             g.Clear(Color.White);
-            pic.Image = bm;
+            canvas.Image = bm;
         }
 
         Bitmap bm;
@@ -61,7 +61,7 @@ namespace PaintApplication
                 }
             }
 
-            pic.Refresh();
+            canvas.Refresh();
         }
 
         private void pic_MouseUp(object sender, MouseEventArgs e)
