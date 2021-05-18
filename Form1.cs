@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,16 +105,16 @@ namespace PaintApplication
 
             if (leftMenuButton == 5)
             {
-                if(points.Count() == 2)
+                if (points.Count() == 2)
                 {
                     points.Add(new Point(x, y));
                     g.DrawPolygon(p, points.ToArray());
                     points.Clear();
-                } 
+                }
                 else
                 {
                     points.Add(new Point(x, y));
-                }                
+                }
             }
 
             if (leftMenuButton == 6)
@@ -170,7 +171,7 @@ namespace PaintApplication
             // Show the shapes you are drawing on screen
             Graphics g = e.Graphics;
 
-            if(paint)
+            if (paint)
             {
                 if (leftMenuButton == 3)
                 {
@@ -186,7 +187,7 @@ namespace PaintApplication
                 {
                     g.DrawRectangle(p, cX, cY, sX, sY);
                 }
-            }    
+            }
         }
 
         private void undoPaint_Click(object sender, EventArgs e)
@@ -199,6 +200,31 @@ namespace PaintApplication
 
         }
 
+        private void saveTopMenu_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog s = new SaveFileDialog();
+            s.Filter = "png files| *.png|jpeg files| *.jpg|bitmaps | *.bmp";
+            if (s.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (File.Exists(s.FileName))
+                {
+                    File.Delete(s.FileName);
+                }
+                if (s.FileName.Contains(".jpg"))
+                {
+                    bm.Save(s.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                }
+                else if (s.FileName.Contains(".png"))
+                {
+                    bm.Save(s.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                }
+                else if (s.FileName.Contains(".bmp"))
+                {
+                    bm.Save(s.FileName, System.Drawing.Imaging.ImageFormat.Bmp);
+                }
+            }
+        }
+
         private void topMenuBar_Click(object sender, EventArgs e)
         {
 
@@ -206,7 +232,27 @@ namespace PaintApplication
 
         private void loadFileTopMenuItem_Click(object sender, EventArgs e)
         {
+            try
+            {
+                OpenFileDialog o = new OpenFileDialog();
+                o.Filter = "png files| *.png|jpeg files| *.jpg|bitmaps | *.bmp";
+                o.Title = "Open an existing drawing";
+                o.FileName = String.Empty;
+                o.Multiselect = false;
 
+                if (o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    g.Clear(Color.White);
+                    this.leftMenuButton = 0;
+                    bm = new Bitmap(o.FileName);
+                    g = Graphics.FromImage(bm);
+                    canvas.Image = bm;
+                }
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("There was an error opening the bitmap." + "Please check the path.");
+            }
         }
 
         private void informationTopMenuItem_Click(object sender, EventArgs e)
@@ -227,7 +273,7 @@ namespace PaintApplication
         private void newTopMenu_Click(object sender, EventArgs e)
         {
             g.Clear(Color.White);
-            canvas.Image = bm;            
+            canvas.Image = bm;
         }
     }
 }
