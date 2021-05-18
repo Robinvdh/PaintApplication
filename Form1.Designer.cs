@@ -101,6 +101,7 @@ namespace PaintApplication
             this.saveTopMenu.Name = "saveTopMenu";
             this.saveTopMenu.Size = new System.Drawing.Size(180, 22);
             this.saveTopMenu.Text = "Opslaan";
+            this.saveTopMenu.Click += new System.EventHandler(this.saveTopMenu_Click);
             // 
             // informationTopMenu
             // 
