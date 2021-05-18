@@ -37,16 +37,20 @@ namespace PaintApplication
         int index;
         int x, y, sX, sY, cX, cY;
 
-        private void pic_MouseDown(object sender, MouseEventArgs e)
+        List<Point> points = new List<Point>();
+
+        private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
             paint = true;
             py = e.Location;
 
             cX = e.X;
             cY = e.Y;
+
+            points.Add(new Point(x, y));
         }
 
-        private void pic_MouseMove(object sender, MouseEventArgs e)
+        private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (paint)
             {
@@ -63,6 +67,11 @@ namespace PaintApplication
                     g.DrawLine(erase, px, py);
                     py = px;
                 }
+
+                if (index == 7)
+                {
+                    paint = false;
+                }
             }
 
             canvas.Refresh();
@@ -73,7 +82,12 @@ namespace PaintApplication
             sY = e.Y - cY;
         }
 
-        private void pic_MouseUp(object sender, MouseEventArgs e)
+        private void canvas_Click(object send, MouseEventArgs e)
+        {
+            points.Add(new Point(x, y));
+        }
+
+        private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
             paint = false;
 
@@ -92,10 +106,6 @@ namespace PaintApplication
 
             if (index == 5)
             {
-                List<Point> points = new List<Point>();
-
-                points.Add(new Point(x, y));
-
                 g.DrawPolygon(p, points.ToArray());
             }
 
@@ -135,6 +145,11 @@ namespace PaintApplication
             index = 6;
         }
 
+        private void selectButton_Click(object sender, EventArgs e)
+        {
+            index = 7;
+        }
+
         private void exitProgramTopMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Wilt u het programma afsluiten?", "Afsluiten", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -145,6 +160,7 @@ namespace PaintApplication
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
+            // Show the shapes you are drawing on screen
             Graphics g = e.Graphics;
 
             if(paint)
@@ -178,6 +194,11 @@ namespace PaintApplication
             }    
         }
 
+        private void topMenuBar_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void loadFileTopMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -189,11 +210,6 @@ namespace PaintApplication
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void leftToolBar_Paint(object sender, PaintEventArgs e)
         {
 
         }

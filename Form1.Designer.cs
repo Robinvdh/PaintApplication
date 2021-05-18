@@ -68,6 +68,7 @@ namespace PaintApplication
             this.topMenuBar.TabIndex = 0;
             this.topMenuBar.Text = "menuStrip1";
             this.topMenuBar.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
+            this.topMenuBar.Click += new System.EventHandler(this.topMenuBar_Click);
             // 
             // fileTopMenu
             // 
@@ -136,7 +137,6 @@ namespace PaintApplication
             this.leftToolBar.Name = "leftToolBar";
             this.leftToolBar.Size = new System.Drawing.Size(102, 484);
             this.leftToolBar.TabIndex = 1;
-            this.leftToolBar.Paint += new System.Windows.Forms.PaintEventHandler(this.leftToolBar_Paint);
             // 
             // pencilButton
             // 
@@ -264,6 +264,7 @@ namespace PaintApplication
             this.selectButton.Size = new System.Drawing.Size(35, 35);
             this.selectButton.TabIndex = 1;
             this.selectButton.UseVisualStyleBackColor = true;
+            this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
             // 
             // selectAreaButton
             // 
@@ -301,9 +302,10 @@ namespace PaintApplication
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
+            this.canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.canvas_Click);
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
             // PaintApplication
             // 
