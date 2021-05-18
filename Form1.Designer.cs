@@ -68,6 +68,7 @@ namespace PaintApplication
             this.topMenuBar.TabIndex = 0;
             this.topMenuBar.Text = "menuStrip1";
             this.topMenuBar.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
+            this.topMenuBar.Click += new System.EventHandler(this.topMenuBar_Click);
             // 
             // fileTopMenu
             // 
@@ -136,7 +137,6 @@ namespace PaintApplication
             this.leftToolBar.Name = "leftToolBar";
             this.leftToolBar.Size = new System.Drawing.Size(102, 484);
             this.leftToolBar.TabIndex = 1;
-            this.leftToolBar.Paint += new System.Windows.Forms.PaintEventHandler(this.leftToolBar_Paint);
             // 
             // pencilButton
             // 
@@ -201,6 +201,7 @@ namespace PaintApplication
             this.squareButton.TabIndex = 7;
             this.squareButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.squareButton.UseVisualStyleBackColor = false;
+            this.squareButton.Click += new System.EventHandler(this.squareButton_Click);
             // 
             // triangleButton
             // 
@@ -213,6 +214,7 @@ namespace PaintApplication
             this.triangleButton.TabIndex = 6;
             this.triangleButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.triangleButton.UseVisualStyleBackColor = false;
+            this.triangleButton.Click += new System.EventHandler(this.triangleButton_Click);
             // 
             // lineButton
             // 
@@ -225,6 +227,7 @@ namespace PaintApplication
             this.lineButton.TabIndex = 5;
             this.lineButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.lineButton.UseVisualStyleBackColor = false;
+            this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
             // 
             // elipseButton
             // 
@@ -237,6 +240,7 @@ namespace PaintApplication
             this.elipseButton.TabIndex = 4;
             this.elipseButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.elipseButton.UseVisualStyleBackColor = false;
+            this.elipseButton.Click += new System.EventHandler(this.elipseButton_Click);
             // 
             // fillColorButton
             // 
@@ -260,6 +264,7 @@ namespace PaintApplication
             this.selectButton.Size = new System.Drawing.Size(35, 35);
             this.selectButton.TabIndex = 1;
             this.selectButton.UseVisualStyleBackColor = true;
+            this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
             // 
             // selectAreaButton
             // 
@@ -292,13 +297,15 @@ namespace PaintApplication
             // 
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(0, 0);
-            this.canvas.Name = "pic";
+            this.canvas.Name = "canvas";
             this.canvas.Size = new System.Drawing.Size(766, 484);
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
+            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
+            this.canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.canvas_Click);
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
             // PaintApplication
             // 
