@@ -34,7 +34,7 @@ namespace PaintApplication
         Point px, py;
         Pen p = new Pen(Color.Black, 1);
         Pen erase = new Pen(Color.White, 25);
-        int index;
+        int leftMenuButton;
         int x, y, sX, sY, cX, cY;
 
         List<Point> points = new List<Point>();
@@ -46,29 +46,27 @@ namespace PaintApplication
 
             cX = e.X;
             cY = e.Y;
-
-            points.Add(new Point(x, y));
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (paint)
             {
-                if (index == 1)
+                if (leftMenuButton == 1)
                 {
                     px = e.Location;
                     g.DrawLine(p, px, py);
                     py = px;
                 }
 
-                if (index == 2)
+                if (leftMenuButton == 2)
                 {
                     px = e.Location;
                     g.DrawLine(erase, px, py);
                     py = px;
                 }
 
-                if (index == 7)
+                if (leftMenuButton == 7)
                 {
                     paint = false;
                 }
@@ -84,7 +82,7 @@ namespace PaintApplication
 
         private void canvas_Click(object send, MouseEventArgs e)
         {
-            points.Add(new Point(x, y));
+
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
@@ -94,22 +92,31 @@ namespace PaintApplication
             sX = x - cX;
             sY = y - cY;
 
-            if (index == 3)
+            if (leftMenuButton == 3)
             {
                 g.DrawEllipse(p, cX, cY, sX, sY);
             }
 
-            if (index == 4)
+            if (leftMenuButton == 4)
             {
                 g.DrawLine(p, cX, cY, x, y);
             }
 
-            if (index == 5)
+            if (leftMenuButton == 5)
             {
-                g.DrawPolygon(p, points.ToArray());
+                if(points.Count() == 2)
+                {
+                    points.Add(new Point(x, y));
+                    g.DrawPolygon(p, points.ToArray());
+                    points.Clear();
+                } 
+                else
+                {
+                    points.Add(new Point(x, y));
+                }                
             }
 
-            if (index == 6)
+            if (leftMenuButton == 6)
             {
                 g.DrawRectangle(p, cX, cY, sX, sY);
             }
@@ -117,37 +124,37 @@ namespace PaintApplication
 
         private void pencilButton_click(object send, EventArgs e)
         {
-            index = 1;
+            leftMenuButton = 1;
         }
 
         private void eraseButton_Click(object sender, EventArgs e)
         {
-            index = 2;
+            leftMenuButton = 2;
         }
 
         private void elipseButton_Click(object sender, EventArgs e)
         {
-            index = 3;
+            leftMenuButton = 3;
         }
 
         private void lineButton_Click(object sender, EventArgs e)
         {
-            index = 4;
+            leftMenuButton = 4;
         }
 
         private void triangleButton_Click(object sender, EventArgs e)
         {
-            index = 5;
+            leftMenuButton = 5;
         }
 
         private void squareButton_Click(object sender, EventArgs e)
         {
-            index = 6;
+            leftMenuButton = 6;
         }
 
         private void selectButton_Click(object sender, EventArgs e)
         {
-            index = 7;
+            leftMenuButton = 7;
         }
 
         private void exitProgramTopMenuItem_Click(object sender, EventArgs e)
@@ -165,33 +172,31 @@ namespace PaintApplication
 
             if(paint)
             {
-                if (index == 3)
+                if (leftMenuButton == 3)
                 {
                     g.DrawEllipse(p, cX, cY, sX, sY);
                 }
 
-                if (index == 4)
+                if (leftMenuButton == 4)
                 {
                     g.DrawLine(p, cX, cY, x, y);
                 }
 
-                if (index == 5)
-                {
-                    Point[] pointArray =
-                    {
-                        new Point(0, 0),
-                        new Point(50, 30),
-                        new Point(30, 60)
-                    };
-                    
-                    g.DrawPolygon(p, pointArray);
-                }
-
-                if (index == 6)
+                if (leftMenuButton == 6)
                 {
                     g.DrawRectangle(p, cX, cY, sX, sY);
                 }
             }    
+        }
+
+        private void undoPaint_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void redoPaint_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void topMenuBar_Click(object sender, EventArgs e)
@@ -221,7 +226,8 @@ namespace PaintApplication
 
         private void newTopMenu_Click(object sender, EventArgs e)
         {
-
+            g.Clear(Color.White);
+            canvas.Image = bm;            
         }
     }
 }

@@ -40,8 +40,8 @@ namespace PaintApplication
             this.leftToolBar = new System.Windows.Forms.Panel();
             this.pencilButton = new System.Windows.Forms.Button();
             this.eraseButton = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
+            this.redoPaint = new System.Windows.Forms.Button();
+            this.undoPaint = new System.Windows.Forms.Button();
             this.squareButton = new System.Windows.Forms.Button();
             this.triangleButton = new System.Windows.Forms.Button();
             this.lineButton = new System.Windows.Forms.Button();
@@ -85,34 +85,34 @@ namespace PaintApplication
             // newTopMenu
             // 
             this.newTopMenu.Name = "newTopMenu";
-            this.newTopMenu.Size = new System.Drawing.Size(129, 22);
+            this.newTopMenu.Size = new System.Drawing.Size(180, 22);
             this.newTopMenu.Text = "Nieuw...";
             this.newTopMenu.Click += new System.EventHandler(this.newTopMenu_Click);
             // 
             // loadTopMenu
             // 
             this.loadTopMenu.Name = "loadTopMenu";
-            this.loadTopMenu.Size = new System.Drawing.Size(129, 22);
+            this.loadTopMenu.Size = new System.Drawing.Size(180, 22);
             this.loadTopMenu.Text = "Openen...";
             this.loadTopMenu.Click += new System.EventHandler(this.loadFileTopMenuItem_Click);
             // 
             // saveTopMenu
             // 
             this.saveTopMenu.Name = "saveTopMenu";
-            this.saveTopMenu.Size = new System.Drawing.Size(129, 22);
+            this.saveTopMenu.Size = new System.Drawing.Size(180, 22);
             this.saveTopMenu.Text = "Opslaan";
             // 
             // informationTopMenu
             // 
             this.informationTopMenu.Name = "informationTopMenu";
-            this.informationTopMenu.Size = new System.Drawing.Size(129, 22);
+            this.informationTopMenu.Size = new System.Drawing.Size(180, 22);
             this.informationTopMenu.Text = "Informatie";
             this.informationTopMenu.Click += new System.EventHandler(this.informationTopMenuItem_Click);
             // 
             // closeProgramTopMenu
             // 
             this.closeProgramTopMenu.Name = "closeProgramTopMenu";
-            this.closeProgramTopMenu.Size = new System.Drawing.Size(129, 22);
+            this.closeProgramTopMenu.Size = new System.Drawing.Size(180, 22);
             this.closeProgramTopMenu.Text = "Afsluiten";
             this.closeProgramTopMenu.Click += new System.EventHandler(this.exitProgramTopMenuItem_Click);
             // 
@@ -123,8 +123,8 @@ namespace PaintApplication
             this.leftToolBar.BackColor = System.Drawing.Color.WhiteSmoke;
             this.leftToolBar.Controls.Add(this.pencilButton);
             this.leftToolBar.Controls.Add(this.eraseButton);
-            this.leftToolBar.Controls.Add(this.button10);
-            this.leftToolBar.Controls.Add(this.button9);
+            this.leftToolBar.Controls.Add(this.redoPaint);
+            this.leftToolBar.Controls.Add(this.undoPaint);
             this.leftToolBar.Controls.Add(this.squareButton);
             this.leftToolBar.Controls.Add(this.triangleButton);
             this.leftToolBar.Controls.Add(this.lineButton);
@@ -166,29 +166,31 @@ namespace PaintApplication
             this.eraseButton.UseVisualStyleBackColor = false;
             this.eraseButton.Click += new System.EventHandler(this.eraseButton_Click);
             // 
-            // button10
+            // redoPaint
             // 
-            this.button10.BackColor = System.Drawing.Color.Transparent;
-            this.button10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button10.BackgroundImage")));
-            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button10.Location = new System.Drawing.Point(54, 349);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(35, 35);
-            this.button10.TabIndex = 9;
-            this.button10.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button10.UseVisualStyleBackColor = false;
+            this.redoPaint.BackColor = System.Drawing.Color.Transparent;
+            this.redoPaint.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("redoPaint.BackgroundImage")));
+            this.redoPaint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.redoPaint.Location = new System.Drawing.Point(54, 349);
+            this.redoPaint.Name = "redoPaint";
+            this.redoPaint.Size = new System.Drawing.Size(35, 35);
+            this.redoPaint.TabIndex = 9;
+            this.redoPaint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.redoPaint.UseVisualStyleBackColor = false;
+            this.redoPaint.Click += new System.EventHandler(this.redoPaint_Click);
             // 
-            // button9
+            // undoPaint
             // 
-            this.button9.BackColor = System.Drawing.Color.Transparent;
-            this.button9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button9.BackgroundImage")));
-            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button9.Location = new System.Drawing.Point(13, 349);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(35, 35);
-            this.button9.TabIndex = 8;
-            this.button9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button9.UseVisualStyleBackColor = false;
+            this.undoPaint.BackColor = System.Drawing.Color.Transparent;
+            this.undoPaint.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("undoPaint.BackgroundImage")));
+            this.undoPaint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.undoPaint.Location = new System.Drawing.Point(13, 349);
+            this.undoPaint.Name = "undoPaint";
+            this.undoPaint.Size = new System.Drawing.Size(35, 35);
+            this.undoPaint.TabIndex = 8;
+            this.undoPaint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.undoPaint.UseVisualStyleBackColor = false;
+            this.undoPaint.Click += new System.EventHandler(this.undoPaint_Click);
             // 
             // squareButton
             // 
@@ -344,8 +346,8 @@ namespace PaintApplication
         private System.Windows.Forms.Panel background;
         private System.Windows.Forms.Button selectAreaButton;
         private System.Windows.Forms.Button selectButton;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button redoPaint;
+        private System.Windows.Forms.Button undoPaint;
         private System.Windows.Forms.Button squareButton;
         private System.Windows.Forms.Button triangleButton;
         private System.Windows.Forms.Button lineButton;
